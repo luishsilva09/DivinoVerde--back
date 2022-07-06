@@ -1,4 +1,5 @@
 import joi from "joi";
+import db from "../database/mongo.js";
 
 export default async function validSignup(req, res, next) {
   const signupSchema = joi.object({
@@ -22,6 +23,12 @@ export default async function validSignup(req, res, next) {
   if (error) {
     console.log(error);
     return res.sendStatus(401);
+  }
+  const existUser = await db
+    .collection("users")
+    .findOne({ email: req.body.email });
+  if (existUser) {
+    return res.send("Email ja cadastrado").status(422);
   }
   res.locals.body = req.body;
 
