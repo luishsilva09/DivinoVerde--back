@@ -5,7 +5,7 @@ import { v4 as uuid } from "uuid";
 import { ObjectId } from "mongodb";
 
 export async function signup(req, res) {
-  const userData = req.body;
+  const userData = res.locals.body;
   console.log(userData);
   res.send(userData);
 }
