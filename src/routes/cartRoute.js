@@ -1,8 +1,8 @@
 import express from "express";
-import { AddCart } from "../controllers/cartController.js";
+import { AddCart, GetCart } from "../controllers/cartController.js";
 
 const cartRoute = express.Router();
 
 cartRoute.post("/cart/:itemId", AddCart);
-
+cartRoute.get("/cart/:userId", GetCart);
 export default cartRoute;
