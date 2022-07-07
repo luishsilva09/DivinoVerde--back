@@ -4,6 +4,6 @@ import validSignup from "../midllewares/validSignup.js";
 
 const signupRoute = express.Router();
 
-signupRoute.post("/signup", validSignup, signup);
+signupRoute.post("/sign-up", validSignup, signup);
 
 export default signupRoute;

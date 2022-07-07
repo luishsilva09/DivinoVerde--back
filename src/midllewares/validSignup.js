@@ -28,7 +28,7 @@ export default async function validSignup(req, res, next) {
     .collection("users")
     .findOne({ email: req.body.email });
   if (existUser) {
-    return res.send("Email ja cadastrado").status(422);
+    return res.status(422).send("Email ja cadastrado");
   }
   res.locals.body = req.body;
 
