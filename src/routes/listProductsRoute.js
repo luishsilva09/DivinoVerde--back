@@ -1,7 +1,8 @@
 import express from 'express';
+import { listProducts } from '../controllers/listProductsController.js';
 
-const route = express.Router();
+const listProductsRoute = express.Router();
 
-route.get('/products', listProducts);
+listProductsRoute.get('/products', listProducts);
 
-export default route;
+export default listProductsRoute;
