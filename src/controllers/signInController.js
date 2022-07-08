@@ -17,7 +17,7 @@ export async function signIn(req, res) {
       const token = uuid();
 
       await db.collection("sessions").insertOne({ token, userId: user._id });
-      res.send({ name, token });
+      res.send({ name, token }).status(200);
     } else {
       res.status(401).send("Usuário ou senha não correspondem.");
     }
