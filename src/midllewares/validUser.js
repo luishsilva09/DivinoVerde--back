@@ -3,11 +3,13 @@ export default async function validUser(req, res, next) {
   const { authorization } = req.headers;
 
   const token = authorization?.replace("Bearer ", "");
-  const session = await db.collection("session").findOne({ token });
-  if (!token || !session) {
+
+  const sessions = await db.collection("sessions").findOne({ token: token });
+
+  if (!token || !sessions) {
     return res.sendStatus(401);
   }
 
-  res.locals.session = session;
+  res.locals.sessions = sessions;
   next();
 }

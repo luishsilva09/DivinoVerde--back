@@ -13,7 +13,6 @@ router.use(listProductsRoute);
 router.use(productRoute);
 
 router.use(cartRoute);
-router.post("/sign-in", signIn);
-
+router.use(signInRoute);
 
 export default router;

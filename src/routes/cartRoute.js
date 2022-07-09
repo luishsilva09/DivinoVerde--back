@@ -5,5 +5,5 @@ import validUser from "../midllewares/validUser.js";
 const cartRoute = express.Router();
 
 cartRoute.post("/cart/:itemId", validUser, AddCart);
-cartRoute.get("/cart/:userId", validUser, GetCart);
+cartRoute.get("/cart", validUser, GetCart);
 export default cartRoute;
