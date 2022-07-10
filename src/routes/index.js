@@ -4,6 +4,7 @@ import signupRoute from "./signupRoute.js";
 import listProductsRoute from "./listProductsRoute.js";
 import productRoute from "./productRoute.js";
 import categoryRoute from "./categoryFilterRouter.js";
+import cartRoute from "./cartRoute.js";
 
 const router = express.Router();
 
@@ -12,5 +13,7 @@ router.use(signupRoute);
 router.use(listProductsRoute);
 router.use(productRoute);
 router.use(categoryRoute);
+
+router.use(cartRoute);
 
 export default router;

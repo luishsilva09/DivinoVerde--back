@@ -15,8 +15,7 @@ export async function product(req, res) {
 export default async function addProduct(req, res) {
   try {
     const productData = req.body;
-    const p = await db.collection("products").insertOne(req.body);
-    console.log(p);
+    await db.collection("products").insertOne(req.body);
     res.sendStatus(200);
   } catch {
     res.sendStatus(500);
