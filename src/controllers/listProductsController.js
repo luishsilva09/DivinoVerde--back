@@ -13,7 +13,7 @@ export async function listProducts (req, res) {
 
     res.status(200).send(products);
   } catch (error) {
-		console.error(error);
-		res.sendStatus(500);
-	}
+    console.error(error);
+    res.sendStatus(500);
+  }
 }
