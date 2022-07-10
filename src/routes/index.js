@@ -13,6 +13,5 @@ router.use(listProductsRoute);
 router.use(productRoute);
 
 router.use(cartRoute);
-router.use(signInRoute);
 
 export default router;
