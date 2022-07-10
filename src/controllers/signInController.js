@@ -33,7 +33,7 @@ export async function existUser(req, res) {
   try {
     const userEmail = await db.collection("users").findOne({ email });
     if (userEmail) {
-      res.status(401).send("Este usuário já existe");
+      res.sendStatus(409);
     } else {
       res.sendStatus(200);
     }
