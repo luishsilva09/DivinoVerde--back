@@ -3,6 +3,6 @@ import { listProducts } from '../controllers/listProductsController.js';
 
 const listProductsRoute = express.Router();
 
-listProductsRoute.get('/products', listProducts);
+listProductsRoute.get("/products", listProducts);
 
 export default listProductsRoute;
