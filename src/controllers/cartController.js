@@ -43,3 +43,20 @@ export async function GetCart(req, res) {
     res.sendStatus(500);
   }
 }
+
+export async function DeleteItem(req, res) {
+  try {
+    const itemId = req.params.itemId;
+    const session = res.locals.sessions;
+
+    await db
+      .collection("users")
+      .updateOne(
+        { _id: new ObjectId(session.userId) },
+        { $pull: { cart: { _id: new ObjectId(itemId) } } }
+      );
+    res.sendStatus(200);
+  } catch {
+    res.sendStatus(500);
+  }
+}
