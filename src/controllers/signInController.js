@@ -27,16 +27,16 @@ export async function signIn(req, res) {
   }
 }
 
-export async function existUser(rew, res) {
+export async function existUser(req, res) {
   const { email } = req.body;
 
   try {
     const userEmail = await db.collection("users").findOne({ email });
     if (userEmail) {
       res.status(401).send("Este usuário já existe");
+    } else {
+      res.sendStatus(200);
     }
-
-    res.sendStatus(200);
 
   } catch (error) {
     console.error(error);
