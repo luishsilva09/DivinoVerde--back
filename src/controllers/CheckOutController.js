@@ -15,7 +15,7 @@ export default async function finish(req, res) {
       .collection("users")
       .updateOne(
         { _id: new ObjectId(sessions.userId) },
-        { $set: { cart: {} } }
+        { $unset: { cart: "" } }
       );
 
     res.sendStatus(200);
