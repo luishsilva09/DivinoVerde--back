@@ -35,7 +35,7 @@ export async function GetCart(req, res) {
     const userData = await db
       .collection("users")
       .findOne({ _id: new ObjectId(session.userId) });
-    if (userData.cart && userData.cart !== null) {
+    if (userData.cart && userData.cart !== {}) {
       userData.cart.map((e) => (total += e.price * e.amount));
       const datauser = {
         userData: userData.cart,
@@ -47,7 +47,8 @@ export async function GetCart(req, res) {
     }
     res.send(datauser);
   } catch (error) {
-    res.status(500).send(error);
+    console.log(error);
+    res.sendStatus(500);
   }
 }
 
