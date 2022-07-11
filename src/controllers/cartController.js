@@ -13,7 +13,7 @@ export async function AddCart(req, res) {
       .collection("users")
       .updateOne(
         { _id: new ObjectId(sessions.userId) },
-        { $push: { cart: { ...itemData } } }
+        { $push: { cart: { ...itemData, amount: 1 } } }
       );
     res.sendStatus(201);
   } catch (error) {
@@ -30,7 +30,7 @@ export async function GetCart(req, res) {
       .collection("users")
       .findOne({ _id: new ObjectId(session.userId) });
     if (userData.cart) {
-      userData.cart.map((e) => (total += e.price));
+      userData.cart.map((e) => (total += e.price * e.amount));
       const datauser = {
         userData: userData.cart,
         total,
@@ -57,6 +57,34 @@ export async function DeleteItem(req, res) {
       );
     res.sendStatus(200);
   } catch {
+    res.sendStatus(500);
+  }
+}
+
+export async function CartEdit(req, res) {
+  try {
+    const sessions = res.locals.sessions;
+
+    await db
+      .collection("users")
+      .updateOne(
+        { _id: new ObjectId(sessions.userId) },
+        { $pull: { cart: { _id: new ObjectId(req.body.itemId) } } }
+      );
+
+    const itemData = await db
+      .collection("products")
+      .findOne({ _id: new ObjectId(req.body.itemId) });
+    await db
+      .collection("users")
+      .updateOne(
+        { _id: new ObjectId(sessions.userId) },
+        { $push: { cart: { ...itemData, amount: req.body.value } } }
+      );
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 }
