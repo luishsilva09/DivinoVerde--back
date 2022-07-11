@@ -6,15 +6,21 @@ export async function AddCart(req, res) {
     const itemId = req.params.itemId;
     const sessions = res.locals.sessions;
 
-    const itemData = await db
-      .collection("products")
-      .findOne({ _id: new ObjectId(itemId) });
-    await db
-      .collection("users")
-      .updateOne(
-        { _id: new ObjectId(sessions.userId) },
-        { $push: { cart: { ...itemData, amount: 1 } } }
-      );
+    const exist = await db.collection("users").findOne({
+      _id: new ObjectId(sessions.userId),
+      cart: { $elemMatch: { _id: new ObjectId(itemId) } },
+    });
+    if (!exist) {
+      const itemData = await db
+        .collection("products")
+        .findOne({ _id: new ObjectId(itemId) });
+      await db
+        .collection("users")
+        .updateOne(
+          { _id: new ObjectId(sessions.userId) },
+          { $push: { cart: { ...itemData, amount: 1 } } }
+        );
+    }
     res.sendStatus(201);
   } catch (error) {
     res.sendStatus(500);
