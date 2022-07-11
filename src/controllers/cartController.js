@@ -46,7 +46,7 @@ export async function GetCart(req, res) {
       res.send("Nada no carrinho");
     }
   } catch (error) {
-    console.log(error);
+    console.log(userData.cart);
     res.sendStatus(500);
   }
 }
