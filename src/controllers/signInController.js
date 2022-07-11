@@ -26,20 +26,3 @@ export async function signIn(req, res) {
     res.sendStatus(500);
   }
 }
-
-export async function existUser(req, res) {
-  const { email } = req.body;
-
-  try {
-    const userEmail = await db.collection("users").findOne({ email });
-    if (userEmail) {
-      res.sendStatus(409);
-    } else {
-      res.sendStatus(200);
-    }
-
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
-  }
-}

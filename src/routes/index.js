@@ -5,7 +5,10 @@ import listProductsRoute from "./listProductsRoute.js";
 import productRoute from "./productRoute.js";
 import categoryRoute from "./categoryFilterRouter.js";
 import cartRoute from "./cartRoute.js";
+
 import checkOutRoute from "./checkOutRoute.js";
+
+import userRoute from "./userRoute.js";
 
 const router = express.Router();
 
@@ -15,6 +18,10 @@ router.use(listProductsRoute);
 router.use(productRoute);
 router.use(categoryRoute);
 router.use(cartRoute);
+
 router.use(checkOutRoute);
+
+router.use(userRoute);
+
 
 export default router;
